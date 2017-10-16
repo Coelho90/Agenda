@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="0747c6dfdea7ba3af835017c7493d8d80475a374">
+        sha1="8f249ddc415c2b6d2dd36f2dea5bdaa51f79dc6a">
         <dex dex="D:\code\android\Alura\agenda\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d61bba14ccfa7b52548dd7cbdffa329490f1d3c1\classes.dex" />
     </item>
 
