@@ -1,9 +1,12 @@
 package br.com.alura.agenda;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Browser;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,19 +20,26 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.jar.Manifest;
 
+import br.com.alura.agenda.adapter.AlunosAdapter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.modelo.Aluno;
+
+import static android.Manifest.permission.RECEIVE_SMS;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private ListView listaAlunos;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+
+        if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[] { Manifest.permission.RECEIVE_SMS,  } ,123 );
+        }
 
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
@@ -73,7 +83,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         dao.close();
 
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
+        AlunosAdapter adapter = new AlunosAdapter(this, alunos);
         listaAlunos.setAdapter(adapter);
     }
 
